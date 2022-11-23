@@ -1,0 +1,101 @@
+$body-color: rgba(17, 207, 82, 0.9);
+$font-color: white;
+$font-family: cursive;
+$padding: 2% 2%;
+$margin: 20px 0px;
+$border: 3px solid #03fcf8;
+@mixin flex {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+@mixin inputbtn {
+	height: 30px;
+	border-radius: 10px;
+	margin: 10px 10px;
+	padding: 0 2%;
+}
+body {
+	margin: 0;
+	padding: 0;
+	background-color: $body-color;
+
+	font-family: $font-family;
+	list-style: none;
+	@include flex;
+}
+
+.app {
+	margin: 5% auto;
+	width: 500px;
+	background-color: darkslategrey;
+	border-radius: 20px;
+	box-shadow: rgba(0, 0, 0.35) 0px 5px 20px;
+}
+.header {
+	text-align: center;
+	padding: $padding;
+	margin-top: 10px;
+	font-weight: bold;
+}
+
+.todolist {
+	padding: $padding;
+	form {
+		@include flex;
+		input {
+			width: 100%;
+			@include inputbtn;
+			padding: 1px;
+			border: 0;
+
+			padding-left: 10px;
+		}
+		input[type="text"]:focus {
+			box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+			border: 2px solid lightseagreen;
+		}
+		.btn {
+			@include inputbtn;
+			border-radius: 5px;
+			background-color: #2569f6;
+			border: 0;
+		}
+		.btn:hover {
+			background-color: green;
+			box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+		}
+	}
+	div {
+		margin: 15px auto;
+		padding-left: 3px;
+	}
+}
+.tasks {
+	background-color: #fd843ced;
+	width: 90%;
+
+	border-radius: 10px;
+	box-shadow: rgba(0, 0, 0.35) 0px 5px 20px;
+	padding-right: 1%;
+	@include flex;
+	div {
+		width: 70%;
+		margin: 5px auto;
+		padding: 0;
+	}
+	.btn {
+		width: 20%;
+		display: flex;
+		justify-content: space-around;
+	}
+}
+.tasks:hover {
+	background-color: lightgoldenrodyellow;
+}
+
+@media (max-width: 500px) {
+	.app {
+		width: 350px;
+	}
+}
