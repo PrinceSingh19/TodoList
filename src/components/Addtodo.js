@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import TodoTasks from "./TodoTasks";
 
 const Addtodo = () => {
 	// getting the saved todos from local storage
@@ -11,6 +12,7 @@ const Addtodo = () => {
 			return [];
 		}
 	};
+
 	// defining the states
 	const [input, setInput] = useState("");
 	const [list, setList] = useState(getLoacalItems());
@@ -25,8 +27,11 @@ const Addtodo = () => {
 		e.preventDefault();
 	};
 
+	// adding the tasks in the task list
 	const addTask = () => {
-		if (input !== "" && !toggle) {
+		if (!input) {
+			alert("Please enter some todos");
+		} else if (input !== "" && !toggle) {
 			setList(
 				list.map((ele) => {
 					if (ele.id === edit) {
@@ -40,17 +45,6 @@ const Addtodo = () => {
 			setList((list) => [...list, { id: uuidv4(), title: input, completed: false }]);
 		}
 		setInput("");
-	};
-	// handling delete task
-	const deleteTask = (id) => setList((oldlist) => oldlist.filter((todo) => todo.id !== id));
-
-	// handling the updation task
-	const updateTask = (id) => {
-		const findTodo = list.find((todo) => todo.id === id);
-		console.log(findTodo);
-		setInput(findTodo.title);
-		setEdit(findTodo.id);
-		setToggle(false);
 	};
 
 	// loading the saved todo's on 1st rendering the application
@@ -68,38 +62,21 @@ const Addtodo = () => {
 						placeholder="Add Todo..."
 						value={input}
 						onChange={(e) => handleChange(e)}
+						ref={(input) => input?.focus?.()}
 					/>
 					{toggle ? (
-						<i className="fa fa-plus addBtn " title="Add items" onClick={() => addTask()}></i>
+						<i className="fa fa-plus addBtn btns " title="Add items" onClick={() => addTask()}></i>
 					) : (
-						<i className="fa fa-edit addBtn " title="Edit items" onClick={() => addTask()}></i>
+						<i className="fa fa-edit addBtn btns " title="Edit items" onClick={() => addTask()}></i>
 					)}
 				</form>
-				<div>
-					{list.length === 0 ? (
-						<p>Please enter some todos...</p>
-					) : (
-						list.map((todos) => {
-							return (
-								<div key={todos.id} className="tasks">
-									<div>{todos.title}</div>
-									<div className="btn">
-										<i
-											className="fa fa-edit"
-											title="Edit items"
-											onClick={() => updateTask(todos.id)}
-										></i>
-										<i
-											className="fa fa-solid fa-trash"
-											title="Delete items"
-											onClick={() => deleteTask(todos.id)}
-										></i>
-									</div>
-								</div>
-							);
-						})
-					)}
-				</div>
+				<TodoTasks
+					list={list}
+					setEdit={setEdit}
+					setToggle={setToggle}
+					setInput={setInput}
+					setList={setList}
+				/>
 			</div>
 		</>
 	);
