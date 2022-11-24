@@ -42,25 +42,32 @@ body {
 .todolist {
 	padding: $padding;
 	form {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+
 		input {
 			width: 90%;
 			@include inputbtn;
-			padding: 1px;
+			padding: 10px;
 			border: 0;
 			box-shadow: rgba(0, 0, 0.35) 0px 5px 20px;
 			padding-left: 10px;
-			margin-left: 18px;
 		}
 		input[type="text"]:focus {
 			box-shadow: 0 0 3px green !important;
 		}
 		.addBtn {
-			margin-left: -53px;
+			position: absolute;
+			margin-left: 370px;
+			margin-top: 27px;
 		}
 	}
+}
+.todos {
+	padding-bottom: 10px;
 	div {
-		margin: 15px auto;
-		padding-left: 3px;
+		padding: 10px;
 	}
 }
 .tasks {
@@ -69,6 +76,7 @@ body {
 	border-radius: 10px;
 	box-shadow: rgba(0, 0, 0.35) 0px 5px 20px;
 	padding-right: 1%;
+	margin: 10px auto;
 	@include flex;
 	div {
 		width: 70%;
@@ -95,6 +103,8 @@ body {
 		margin-left: 12px;
 	}
 	.todolist form .addBtn {
-		margin-left: -44px;
+		position: absolute;
+		margin-left: 255px;
+		margin-top: 27px;
 	}
 }

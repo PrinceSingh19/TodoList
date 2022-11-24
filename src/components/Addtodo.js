@@ -1,24 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { v4 as uuidv4 } from "uuid";
-import TodoTasks from "./TodoTasks";
 
-const Addtodo = () => {
-	// getting the saved todos from local storage
-	const getLoacalItems = () => {
-		let list = localStorage.getItem("items");
-		if (list) {
-			return JSON.parse(localStorage.getItem("items"));
-		} else {
-			return [];
-		}
-	};
-
-	// defining the states
-	const [input, setInput] = useState("");
-	const [list, setList] = useState(getLoacalItems());
-	const [edit, setEdit] = useState(null);
-	const [toggle, setToggle] = useState(true);
-
+const Addtodo = ({ list, setList, input, setInput, edit, toggle, setToggle }) => {
 	// handling changes made in input field
 	const handleChange = (e) => setInput(e.target.value);
 
@@ -47,11 +30,6 @@ const Addtodo = () => {
 		setInput("");
 	};
 
-	// loading the saved todo's on 1st rendering the application
-	useEffect(() => {
-		localStorage.setItem("items", JSON.stringify(list));
-	}, [list]);
-
 	return (
 		<>
 			<div className="todolist">
@@ -63,6 +41,7 @@ const Addtodo = () => {
 						value={input}
 						onChange={(e) => handleChange(e)}
 						ref={(input) => input?.focus?.()}
+						autoComplete="off"
 					/>
 					{toggle ? (
 						<i className="fa fa-plus addBtn btns " title="Add items" onClick={() => addTask()}></i>
@@ -70,13 +49,6 @@ const Addtodo = () => {
 						<i className="fa fa-edit addBtn btns " title="Edit items" onClick={() => addTask()}></i>
 					)}
 				</form>
-				<TodoTasks
-					list={list}
-					setEdit={setEdit}
-					setToggle={setToggle}
-					setInput={setInput}
-					setList={setList}
-				/>
 			</div>
 		</>
 	);
