@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 const Addtodo = () => {
+	// getting the saved todos from local storage
 	const getLoacalItems = () => {
 		let list = localStorage.getItem("items");
 		if (list) {
@@ -10,13 +11,16 @@ const Addtodo = () => {
 			return [];
 		}
 	};
+	// defining the states
 	const [input, setInput] = useState("");
 	const [list, setList] = useState(getLoacalItems());
 	const [edit, setEdit] = useState(null);
 	const [toggle, setToggle] = useState(true);
 
+	// handling changes made in input field
 	const handleChange = (e) => setInput(e.target.value);
 
+	// handling submit
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		if (input !== "" && !toggle) {
@@ -35,8 +39,10 @@ const Addtodo = () => {
 		setInput("");
 	};
 
+	// handling delete task
 	const deleteTask = (id) => setList((oldlist) => oldlist.filter((todo) => todo.id !== id));
 
+	// handling the updation task
 	const updateTask = (id) => {
 		const findTodo = list.find((todo) => todo.id === id);
 		console.log(findTodo);
@@ -45,9 +51,11 @@ const Addtodo = () => {
 		setToggle(false);
 	};
 
+	// loading the saved todo's on 1st rendering the application
 	useEffect(() => {
 		localStorage.setItem("items", JSON.stringify(list));
 	}, [list]);
+
 	return (
 		<>
 			<div className="todolist">
