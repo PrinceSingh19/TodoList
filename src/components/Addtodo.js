@@ -23,6 +23,9 @@ const Addtodo = () => {
 	// handling submit
 	const handleSubmit = (e) => {
 		e.preventDefault();
+	};
+
+	const addTask = () => {
 		if (input !== "" && !toggle) {
 			setList(
 				list.map((ele) => {
@@ -38,7 +41,6 @@ const Addtodo = () => {
 		}
 		setInput("");
 	};
-
 	// handling delete task
 	const deleteTask = (id) => setList((oldlist) => oldlist.filter((todo) => todo.id !== id));
 
@@ -67,9 +69,11 @@ const Addtodo = () => {
 						value={input}
 						onChange={(e) => handleChange(e)}
 					/>
-					<button type="submit" className="btn">
-						Add
-					</button>
+					{toggle ? (
+						<i className="fa fa-plus addBtn " title="Add items" onClick={() => addTask()}></i>
+					) : (
+						<i className="fa fa-edit addBtn " title="Edit items" onClick={() => addTask()}></i>
+					)}
 				</form>
 				<div>
 					{list.length === 0 ? (

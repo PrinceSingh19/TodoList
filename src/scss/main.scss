@@ -19,7 +19,6 @@ body {
 	margin: 0;
 	padding: 0;
 	background-color: $body-color;
-
 	font-family: $font-family;
 	list-style: none;
 	@include flex;
@@ -42,19 +41,23 @@ body {
 .todolist {
 	padding: $padding;
 	form {
-		@include flex;
 		input {
-			width: 100%;
+			width: 90%;
 			@include inputbtn;
 			padding: 1px;
 			border: 0;
-
+			box-shadow: rgba(0, 0, 0.35) 0px 5px 20px;
 			padding-left: 10px;
+			margin-left: 18px;
 		}
 		input[type="text"]:focus {
 			box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 			border: 2px solid lightseagreen;
 		}
+		.addBtn {
+			margin-left: -43px;
+		}
+
 		.btn {
 			@include inputbtn;
 			border-radius: 5px;
